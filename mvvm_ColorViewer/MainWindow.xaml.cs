@@ -23,6 +23,8 @@ namespace mvvm_ColorViewer
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new AppVM();
         }
     }
 }

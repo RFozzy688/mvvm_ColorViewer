@@ -33,17 +33,17 @@
         <TextBlock Text="Green:" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <TextBlock Text="Blue:" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-        <TextBlock Name="TextBlockAlpha" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TextBlockRed" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TextBlockGreen" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Name="TextBlockBlue" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockAlpha" Text="{Binding Path=AlphaComponent}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockRed" Text="{Binding Path=RedComponent}" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockGreen" Text="{Binding Path=GreenComponent}" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockBlue" Text="{Binding Path=BlueComponent}" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <Slider Name="SliderAlpha" Maximum="255" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
-        <Slider Name="SliderRed" Maximum="255" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
-        <Slider Name="SliderGreen" Maximum="255" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <Slider Name="SliderBlue" Maximum="255" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
+        <Slider Name="SliderAlpha" IsEnabled="{Binding ElementName=CheckBoxAlpha,Path=IsChecked}" Value="{Binding Path=AlphaComponent}" Maximum="255" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+        <Slider Name="SliderRed" IsEnabled="{Binding ElementName=CheckBoxRed,Path=IsChecked}" Value="{Binding Path=RedComponent}" Maximum="255" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+        <Slider Name="SliderGreen" IsEnabled="{Binding ElementName=CheckBoxGreen,Path=IsChecked}" Value="{Binding Path=GreenComponent}" Maximum="255" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <Slider Name="SliderBlue" IsEnabled="{Binding ElementName=CheckBoxBlue,Path=IsChecked}" Value="{Binding Path=BlueComponent}" Maximum="255" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
 
-        <TextBlock Name="ResultColor" Background="Purple" Margin="5" Grid.Column="4" Grid.RowSpan="4"/>
+        <TextBlock Name="ResultColor1" Background="{Binding Path=ResultColor}" Margin="5" Grid.Column="4" Grid.RowSpan="4"/>
 
         <Button Name="AddColor" Grid.ColumnSpan="3" Grid.Row="4" Width="100" Height="25">Add</Button>
 
