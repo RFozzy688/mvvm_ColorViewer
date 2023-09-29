@@ -24,7 +24,7 @@ namespace mvvm_ColorViewer
         {
             InitializeComponent();
 
-            DataContext = new AppVM();
+            DataContext = new AppVM(this);
         }
     }
 }

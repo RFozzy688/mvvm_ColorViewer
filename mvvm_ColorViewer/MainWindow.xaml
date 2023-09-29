@@ -45,10 +45,10 @@
 
         <TextBlock Name="ResultColor1" Background="{Binding Path=ResultColor}" Margin="5" Grid.Column="4" Grid.RowSpan="4"/>
 
-        <Button Name="AddColor" Grid.ColumnSpan="3" Grid.Row="4" Width="100" Height="25">Add</Button>
+        <Button Name="AddColor" Command="{Binding AddColor}" CommandParameter="btn_add" Grid.ColumnSpan="3" Grid.Row="4" Width="100" Height="25">Add</Button>
 
         <ListBox Name="ListColors" BorderBrush="Gray" Grid.ColumnSpan="5" Grid.Row="5" Margin="5" HorizontalContentAlignment="Stretch">
-            <ListBoxItem>
+            <!--<ListBoxItem>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="75"/>
@@ -59,7 +59,7 @@
                     <TextBlock Background="Aqua" Grid.Column="1" />
                     <Button Grid.Column="2" Margin="2">Delete</Button>
                 </Grid>
-            </ListBoxItem>
+            </ListBoxItem>-->
         </ListBox>
     </Grid>
 </Window>

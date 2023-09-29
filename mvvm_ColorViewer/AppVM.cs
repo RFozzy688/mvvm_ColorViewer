@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace mvvm_ColorViewer
@@ -18,10 +20,14 @@ namespace mvvm_ColorViewer
         byte _green;
         byte _blue;
         SolidColorBrush _brush;
-        string _formatX;
-        public AppVM() 
+        MainWindow _view;
+        public AppVM(MainWindow view) 
         {
             _model = new CreateColor();
+            _addColorCommand = new Commands(AddColorExecute);
+            _deleteItemCommand = new Commands(DeleteItemExecute);
+
+            _view = view;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -82,14 +88,73 @@ namespace mvvm_ColorViewer
                 OnPropertyChanged(new PropertyChangedEventArgs(nameof(ResultColor)));
             }
         }
-        public string FormatX
+
+        Commands _addColorCommand;
+        Commands _deleteItemCommand;
+        public Commands AddColor
         {
-            get => _formatX;
-            set
+            get
             {
-                _formatX = value;
-                OnPropertyChanged(new PropertyChangedEventArgs(nameof(FormatX)));
+                return _addColorCommand;
             }
+        }
+        public Commands DeleteItem
+        {
+            get
+            {
+                return _deleteItemCommand;
+            }
+        }
+        private void AddColorExecute(object param)
+        {
+            CreateItemListBox();
+        }
+        private void DeleteItemExecute(object param)
+        {
+            DeleteListBoxItem((ListBoxItem)param);
+        }
+
+        private bool CanExecuteCalculate(object param)
+        {
+            return true;
+        }
+        private void CreateItemListBox()
+        {
+            ListBoxItem lbi = new ListBoxItem();
+            Grid grid = new Grid();
+
+            grid.ColumnDefinitions.Add(new ColumnDefinition{ Width = new GridLength(75) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(100) });
+
+            TextBlock colorNameX = new TextBlock();
+            colorNameX.Text = _model.ColorFormatX();
+            colorNameX.VerticalAlignment = VerticalAlignment.Center;
+
+            TextBlock color = new TextBlock();
+            color.Background = ResultColor;
+
+            Button button = new Button();
+            button.Content = "Delete";
+            button.Margin = new Thickness(2);
+            button.CommandParameter = lbi;
+            button.Command = DeleteItem;
+            button.CommandTarget = _view.ListColors;
+
+            grid.Children.Add(colorNameX);
+            grid.Children.Add(color);
+            grid.Children.Add(button);
+
+            Grid.SetColumn(colorNameX, 0);
+            Grid.SetColumn(color, 1);
+            Grid.SetColumn(button, 2);
+
+            lbi.Content = grid;
+            _view.ListColors.Items.Add(lbi);
+        }
+        private void DeleteListBoxItem(ListBoxItem item)
+        {
+            _view.ListColors.Items.Remove(item);
         }
     }
 }
